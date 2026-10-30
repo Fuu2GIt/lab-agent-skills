@@ -17,6 +17,57 @@
 2. 学生がエージェントに話しかけます。例：「Issue を作りたい」「ボードの優先順位を見て」「この議事録から Issue を作って」。
 3. エージェントは、わからないことを1問ずつ、推奨回答つきで学生に聞きます。学生の答えが出そろうまで、思い込みでは進めません。
 
+## 導入手順
+
+エージェントがスキルを読み込めるように、2つのフォルダ（`lab-todo-create`、`lab-board-manage`）を、使うツールのスキル置き場にコピーします。ここでは OpenCode の手順を書きます。
+
+### 1. このリポジトリを手元に取得する
+
+```
+git clone https://github.com/Fuu2GIt/lab-agent-skills
+```
+
+### 2. スキルを置く
+
+置き場所は、自分のパソコン全体で使うか、特定のリポジトリだけで使うかで選びます。
+
+- 自分のパソコン全体で使う場合（OpenCode）：
+
+  ```
+  mkdir -p ~/.config/opencode/skills
+  cp -r lab-agent-skills/lab-todo-create lab-agent-skills/lab-board-manage ~/.config/opencode/skills/
+  ```
+
+- 特定のリポジトリだけで使う場合（OpenCode）：そのリポジトリの直下で次を実行します。
+
+  ```
+  mkdir -p .opencode/skills
+  cp -r <取得したlab-agent-skillsのパス>/lab-todo-create <取得したlab-agent-skillsのパス>/lab-board-manage .opencode/skills/
+  ```
+
+OpenCode は `~/.claude/skills/` や `.claude/skills/`、`~/.agents/skills/` や `.agents/skills/` に置いたスキルも読みます。他のツールを使う場合は、そのツールのスキル置き場に同じ2つのフォルダを置いてください。
+
+### 3. 置いたあとの決まり
+
+- フォルダ名は `lab-todo-create`、`lab-board-manage` のままにします。`SKILL.md` の先頭の `name` と一致している必要があります。
+- ファイル名は大文字の `SKILL.md` です。
+- OpenCode を起動し直して、スキルが一覧に出ているか確認します。
+
+### 4. 動くことを確かめる
+
+エージェントに「Issue を作りたい」「今日、何から手をつける？」と話しかけます。説明文に合うほうのスキルを、エージェントが選んで読み込みます。
+
+### 5. エージェントが GitHub を操作できるようにする
+
+エージェントは、学生本人の GitHub アカウントで、ボードと Issue を操作します。次の2つをそろえてください。
+
+- 学生本人が、参加しているテーマのリポジトリと自分の小研究リポジトリを操作できること。
+- エージェントが、学生本人のアカウントで GitHub を使えること（例：`gh auth login`）。
+
+### 6. 更新するとき
+
+スキルが直されたら、取得したリポジトリで `git pull` し、2のコピーをもう一度行います。
+
 ## 共通の約束
 
 - 操作するのは、学生が参加しているテーマのボードと、そのテーマのリポジトリ、学生本人の小研究リポジトリだけです。`lab-hub` と `lab-knowledge` は読むだけです。
