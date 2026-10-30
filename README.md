@@ -1,6 +1,30 @@
 # lab-agent-skills
 
-Agent skills for each student's agent in the lab.
+研究室の学生それぞれのエージェントが、GitHub Project のボード管理と TODO（Issue）作成を同じやり方で回すためのスキル集です。
 
-- `lab-todo-create/SKILL.md`: create Issues (Todos) following the lab's workflow
-- `lab-board-manage/SKILL.md`: manage the lab's GitHub Project board
+## 入っているスキル
+
+| スキル | 場所 | 何をするか |
+| --- | --- | --- |
+| `lab-todo-create` | `lab-todo-create/SKILL.md` | 学生と1問ずつ確認しながら Issue（TODO）を作る。議事録からの Issue 化、Issue の分割、質問票の作成も扱う |
+| `lab-board-manage` | `lab-board-manage/SKILL.md` | ボードの優先順位の提案、`担当中` への移動、完了の確認とクローズ、`未定` の再確認を行う |
+
+2つは別々のスキルです。エージェントは、学生の依頼内容に合うほうを説明文（description）から選びます。
+
+## 使い方
+
+1. 学生本人が、このリポジトリから使いたい `SKILL.md` を自分のエージェントに読み込ませます。読み込み方は、使っているツール（Grok Bot、Cursor など）の方法に従ってください。
+2. 学生がエージェントに話しかけます。例：「Issue を作りたい」「ボードの優先順位を見て」「この議事録から Issue を作って」。
+3. エージェントは、わからないことを1問ずつ、推奨回答つきで学生に聞きます。学生の答えが出そろうまで、思い込みでは進めません。
+
+## 共通の約束
+
+- 操作するのは、学生が参加しているテーマのボードと、そのテーマのリポジトリ、学生本人の小研究リポジトリだけです。`lab-hub` と `lab-knowledge` は読むだけです。
+- Issue の作成や分割、ラベルや担当者の設定、ボードへの追加、`担当中` への移動、クローズ、優先順位の番号の付け直しは、学生が「はい」と言ってから行います。
+- 質問票（`notes/questionnaire.md`、複数人のテーマは `meetings/questionnaire.md`）の追加や更新は、学生が「はい」と言ってから Draft PR で出します。`main` には直接 push しません。
+- Issue のタイトルは `番号. [接頭辞] 内容` の形です。番号は優先順位（1が最優先）で、締め切りは書きません。
+
+## 注意
+
+- スキルの本文は英語で書かれています。エージェントは学生と日本語で話します。
+- 研究室の方針（`lab-hub` の policy）が変わったときは、このスキルも直してください。
